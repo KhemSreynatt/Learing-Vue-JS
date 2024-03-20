@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <!-- Sidebar -->
-    <SidebarMenu />
+    <SidebarMenu v-if="!['login', 'register'].includes($route.name)" />
 
     <!-- Content -->
     <router-view />

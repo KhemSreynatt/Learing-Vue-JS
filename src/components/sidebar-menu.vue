@@ -30,9 +30,9 @@
                 <span class="material-icons">phone_in_talk</span>
                 <span class="text">Contact</span>
             </router-link>
-            <router-link to="/register" class="button">
+            <router-link to="/login" class="button">
                 <span class="material-icons">system_update_alt</span>
-                <span class="text">Register</span>
+                <span class="text">Login</span>
             </router-link>
         </div>
 

@@ -1,4 +1,3 @@
-<!-- RegistrationForm.vue -->
 <template>
     <div style="justify-content: center;  width: 100%; background-color: #F0F8FF; ">
         <img style="width: 100%; height: 270px" src="https://www.akamai.com/site/en/images/logo/2019/sinet-logo-2.svg"
@@ -20,12 +19,13 @@
             <div class="input-container">
                 <i style="padding-bottom: 10px;" class="material-icons">lock</i>
                 <input style="" placeholder="Enter Comfirm Passwrod" type="password" id="confirm-password"
-                    v-model="password" required>
+                    v-model="confirm_password" required>
             </div>
-            <button type="submit">Register</button>
-            <div>
-                <p>Already have an account? <span style="color: #0066b2 ;">Login now</span></p>
 
+            <button type="submit" @click="register">Register</button>
+            <div>
+                <p>Already have an account? <span style="color: #0066b2 ;"><a href="" @click="login">Login
+                            now</a></span></p>
             </div>
         </form>
     </div>
@@ -37,13 +37,26 @@ export default {
         return {
             username: '',
             email: '',
-            password: ''
+            password: '',
+            confirm_password: '',
         };
     },
     methods: {
         register() {
-            // Perform registration logic here (e.g., send data to server)
-            console.log('Registration submitted');
+
+
+            if (this.username != '' && this.email != '' && this.password == this.confirm_password) {
+                this.$router.push({ name: 'home' });
+                return;
+            }
+            if (this.password != this.confirm_password) {
+                alert('Your password not match confirm password');
+                return;
+            }
+
+        },
+        login() {
+            this.$router.push({ name: 'login' });
         }
     }
 }
