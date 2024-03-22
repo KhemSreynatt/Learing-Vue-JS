@@ -1,5 +1,5 @@
 <template>
-    <div style="justify-content: center;  width: 100%; background-color: #F0F8FF; ">
+    <div class="pages">
         <img style="width: 100%; height: 270px" src="https://www.akamai.com/site/en/images/logo/2019/sinet-logo-2.svg"
             alt="">
         <form @submit.prevent="register" style="background-color: #ffff;">
@@ -24,8 +24,12 @@
 
             <button type="submit" @click="register">Register</button>
             <div>
-                <p>Already have an account? <span style="color: #0066b2 ;"><a href="" @click="login">Login
-                            now</a></span></p>
+                <p>Already have an account?
+                    <span style="color: #0066b2 ;">
+                        <a href="" @click="login">Login now
+                        </a>
+                    </span>
+                </p>
             </div>
         </form>
     </div>
@@ -63,9 +67,17 @@ export default {
 </script>
 
 <style scoped>
+.pages {
+    min-height: 100vh;
+    backdrop-filter: blur(100px);
+    width: 100%;
+    background-color: #A4DDED;
+    text-align: center;
+}
+
 .input-container {
     position: relative;
-    /* margin: 15px; */
+    text-align: start;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 10px;
@@ -135,8 +147,8 @@ button {
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 10px;
-    /* margin: 20px; */
-    background-color: #007bff;
+    height: 40px;
+    background-color: #008080;
     color: #fff;
     border: none;
     border-radius: 3px;

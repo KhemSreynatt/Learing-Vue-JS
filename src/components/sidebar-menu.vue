@@ -1,7 +1,8 @@
 <template>
     <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
         <div class="logo">
-            <img :src="logoURL" alt="Vue" />
+            <img
+                src="https://play-lh.googleusercontent.com/z3k1e_09KlP6SQ-LXMqkyCxdEJOoVz2WClgjX1ElqR7mQfATM7yqm5Q3BFdOHMJ5O3-P=w240-h480-rw">
         </div>
 
         <div class="menu-toggle-wrap">
@@ -51,7 +52,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import logoURL from '../assets/logo.png'
+
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
@@ -66,7 +67,7 @@ aside {
     display: flex;
     flex-direction: column;
 
-    background-color: var(--dark);
+    background-color: var(--primary);
     color: var(--light);
 
     width: calc(2rem + 32px);
@@ -84,7 +85,9 @@ aside {
         margin-bottom: 1rem;
 
         img {
-            width: 2rem;
+            width: 3rem;
+            border-radius: 100%;
+            background-color: #ffff;
         }
     }
 
@@ -109,7 +112,7 @@ aside {
 
             &:hover {
                 .material-icons {
-                    color: var(--primary);
+                    // color: var(--primary);
                     transform: translateX(0.5rem);
                 }
             }
@@ -152,7 +155,8 @@ aside {
             }
 
             &:hover {
-                background-color: var(--dark-alt);
+                // background-color: var(--dark-alt);
+                background-color: #E0FFFF;
 
                 .material-icons,
                 .text {
@@ -161,7 +165,8 @@ aside {
             }
 
             &.router-link-exact-active {
-                background-color: var(--dark-alt);
+                // background-color: var(--dark-alt);
+                background-color: #E0FFFF;
                 border-right: 5px solid var(--primary);
 
                 .material-icons,

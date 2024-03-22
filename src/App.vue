@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <!-- Sidebar -->
-    <SidebarMenu v-if="!['login', 'register'].includes($route.name)" />
+    <SidebarMenu v-if="!['login', 'register', 'forgetPassword'].includes($route.name)" />
 
     <!-- Content -->
     <router-view />
@@ -20,7 +20,7 @@ export default {
 
 <style lang="scss">
 :root {
-  --primary: #4ade80;
+  --primary: #008080;
   --primary-alt: #22c55e;
   --grey: #64748b;
   --dark: #1e293b;

@@ -6,7 +6,7 @@ import List from '../views/lists-view.vue';
 import Profile from '../views/profile-veiw.vue';
 import LoginForm from '../components/login_form.vue';
 import RegisterForm from '../components/register_form.vue';
-// import QRCode from '../views/qr_code.vue';
+import ForgetPasswor from '../components/forget_password_form.vue'
 
 const routes = [
 
@@ -44,6 +44,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: RegisterForm,
+  },
+  {
+    path: '/forget-password',
+    name: 'forgetPassword',
+    component: ForgetPasswor,
   },
 
 ]

@@ -3,7 +3,7 @@
     <img style="width: 100%; height: 270px" src="https://www.akamai.com/site/en/images/logo/2019/sinet-logo-2.svg"
       alt="">
     <form @submit.prevent="login">
-      <h2>Login</h2>
+      <h2>Forgot Password</h2>
 
       <div class="input-container" style=" margin-top: 20px;">
         <i style="padding-bottom: 10px;" class="material-icons"
@@ -19,11 +19,16 @@
           :class="{ invalid: !isValid, valid: isValid }" required>
         <span v-if="errorMessage" class="error-message">Please input your password!</span>
       </div>
-      <button type="submit" @click="login">Submit</button>
-      <div>
-        <p>Already have Forget password? <span style="color: #0066b2;"><a href="" @click="forgetPassword">Forgot
-              Password</a></span></p>
+      <div class="input-container" style=" margin-top: 20px;">
+        <i style="padding-bottom: 10px;" class="material-icons"
+          :class="{ icon_valid: !isValid, icon: isValid }">lock</i>
+        <input style="" placeholder="Enter Confirm Passwrod" type="password" id="password" v-model="confirm_password"
+          :class="{ invalid: !isValid, valid: isValid }" required>
+        <span v-if="errorMessage" class="error-message">Please input your password!</span>
       </div>
+      <button type="submit" @click="login">Submit</button>
+
+
     </form>
   </div>
 </template>
@@ -34,6 +39,7 @@ export default {
     return {
       password: '',
       email: '',
+      confirm_password: '',
       isValid: true,
       errorMessage: '',
     };
@@ -52,9 +58,6 @@ export default {
         this.isValid = false;
       }
 
-    },
-    forgetPassword() {
-      this.$router.push({ name: 'forgetPassword' });
     }
   }
 }
