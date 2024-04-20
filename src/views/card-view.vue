@@ -1,6 +1,6 @@
 <template>
     <div style="padding: 20px; width: 100%;">
-        <h2 style="padding-bottom: 30px;">Add Student</h2>
+        <h2 style="padding-bottom: 30px;">Add List</h2>
         <div style="display: flex;">
             <p>ID:</p> <input type="text" placeholder="Enter your ID" v-model="id" required>
         </div>
@@ -17,7 +17,6 @@
             v-on:click="addStudents">Submit</button>
         <button style=" width: 100px; margin-left: 20px; color: white;   background-color: green;"
             v-on:click="tbnUpdate" v-if="isUpdate">Update</button>
-
         <table style="margin-top: 30px;">
             <tr>
                 <th> ID</th>
@@ -33,7 +32,7 @@
                 <td>{{ student.age }}</td>
                 <td>{{ student.address }}</td>
                 <td>
-                    <vue-qrcode :value="qrCodeValue" :options="{ width: 100, height: 200 }"></vue-qrcode>
+                    <vue-qrcode :value="qrCodeValue" class="qrcode"></vue-qrcode>
                 </td>
                 <td> <button style=" margin-left: 20px; width: 70px;  color: white;   background-color: red;"
                         @click="btnDeleta(index)"> Delete </button>
@@ -41,13 +40,9 @@
                         @click="tbnEdit(index)"> Edit </button>
                 </td>
             </tr>
-
         </table>
-
-
     </div>
 </template>
-
 <script>
 
 import { ref, watch, computed, reactive, toRefs } from 'vue';
@@ -69,8 +64,7 @@ export default {
             id: null,
             isUpdate: false,
             index: null,
-            // Qr code
-            qrCodeValue: 'https://vuejs.org/',
+            qrCodeValue: 'http://m.chaktomuk-dc.com.kh/',
         }
     },
     setup() {
@@ -139,15 +133,28 @@ export default {
 </script>
 
 <style scoped>
+.qrcode {
+    width: 80px;
+    height: 80px;
+}
+
 input {
     width: 40%;
-    height: 40px;
+    height: 32px;
     margin-bottom: 20px;
     padding-left: 10px;
 }
 
 p {
     width: 100px;
+
+}
+
+input::placeholder {
+
+    font-size: 12px;
+    font-style: initial;
+
 }
 
 table {

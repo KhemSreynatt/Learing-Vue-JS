@@ -21,7 +21,6 @@
                 <input style="" placeholder="Enter Comfirm Passwrod" type="password" id="confirm-password"
                     v-model="confirm_password" required>
             </div>
-
             <button type="submit" @click="register">Register</button>
             <div>
                 <p>Already have an account?

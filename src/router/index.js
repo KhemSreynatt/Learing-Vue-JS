@@ -6,7 +6,8 @@ import List from '../views/lists-view.vue';
 import Profile from '../views/profile-veiw.vue';
 import LoginForm from '../components/login_form.vue';
 import RegisterForm from '../components/register_form.vue';
-import ForgetPasswor from '../components/forget_password_form.vue'
+import ForgetPasswor from '../components/forget_password_form.vue';
+import ContactView from '../views/contact-view.vue'
 
 const routes = [
 
@@ -49,6 +50,11 @@ const routes = [
     path: '/forget-password',
     name: 'forgetPassword',
     component: ForgetPasswor,
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: ContactView,
   },
 
 ]

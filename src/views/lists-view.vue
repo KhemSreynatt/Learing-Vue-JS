@@ -4,7 +4,7 @@
             <h3>Show List of User </h3>
         </div>
         <div class="rows">
-            <div>
+            <div style="padding-top: 10px;">
                 <label for="itemsPerPage">Show per page:</label>
                 <select style="width: 80px; color:white; background-color: var(--primary); margin-left: 10px;"
                     id="itemsPerPage" v-model="itemsPerPage">
@@ -13,11 +13,17 @@
                         }}</option>
                 </select>
             </div>
-
-            <input style="height: 40px; margin-right: 100px; width: 300px;" type="text" v-model="searchQuery"
-                placeholder="Search...">
+            <div class="input-container">
+                <i class="material-icons">search</i>
+                <input style="height: 36px; margin-right: 100px; width: 300px; padding-left: 40px;" type="text"
+                    v-model="searchQuery" placeholder="Search...">
+            </div>
         </div>
-
+        <div style="margin-left: 20px; padding-bottom: 8px;">
+            <span class="box" @click="exportToPdf">PDF</span>
+            <span class="box" @click="exportToCsv">CSV</span>
+            <span class="box" @click="exportToExcel">Excel</span>
+        </div>
         <div style="padding-left: 20px;padding-right: 20px; ">
             <table class="table table-striped table-bordered">
                 <thead>
@@ -72,6 +78,7 @@
 
             </div>
 
+
         </div>
     </div>
 
@@ -79,6 +86,8 @@
 
 <script>
 
+// import axios from 'axios'
+import jsPDF from 'jspdf';
 
 export default {
 
@@ -106,6 +115,7 @@ export default {
                 { id: 19, firstName: 'Jessi', lastName: 'Glaser', email: 'jessi.glaser@test.com', role: 'User', phone: "081000999" },
                 { id: 20, firstName: 'Jay', lastName: 'Bilzerian', email: 'jay.bilzerian@test.com', role: 'User', phone: "081000999" },
             ],
+            listData: [],
 
             currentPage: 1,
             itemsPerPage: 10,
@@ -177,6 +187,65 @@ export default {
         },
         getPageButtonClass(pageNumber) {
             return pageNumber === this.currentPage ? 'active' : '';
+        },
+        //
+        exportToPdf() {
+
+
+            const doc = new jsPDF();
+            const headers = ['ID', 'Name', 'Email', 'Phone'];
+            const data = this.users.map(user => [user.id, user.firstName, user.email, user.phone]);
+
+            let y = 10;
+            const idPadding = 20;
+            const columnWidth = 10;
+
+            doc.text('List of Users', 10, y);
+            y += 20;
+            headers.forEach((header, i) => {
+                let x = 10;
+                if (i == 3) {
+                    x += 50;
+                }
+                doc.text(String(header), x + i * (columnWidth + idPadding), y);
+            });
+
+            y += 10;
+            data.forEach((row, rowIndex) => {
+                row.forEach((cell, columnIndex) => {
+                    let xPos = 10 + columnIndex * (columnWidth + idPadding);
+                    if (columnIndex === 3) {
+                        xPos += 50;
+                    }
+
+                    doc.text(String(cell), xPos, y + rowIndex * 10);
+                });
+            });
+
+            doc.save('users.pdf');
+
+        },
+
+        exportToCsv() {
+            const headers = ["ID", 'Name', 'Email', 'Phone'];
+            const data = this.users.map(user => [user.id, user.firstName, user.email, user.phone]);
+            const csvContent = 'data:text/csv;charset=utf-8,' +
+                headers.join(',') + '\n' +
+                data.map(row => row.join(',')).join('\n');
+
+            // Create a link element and trigger a click event to download the file
+            const link = document.createElement('a');
+            link.setAttribute('href', encodeURI(csvContent));
+            link.setAttribute('download', 'user-list.csv');
+            link.click();
+        },
+
+        exportToExcel() {
+            const data = this.users.map(user => [user.id, user.firstName, user.email, user.phone]);
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet([["ID", 'Name', 'Email', 'Phone'], ...data]);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'User List');
+            XLSX.writeFile(workbook, 'user-list.xlsx');
         }
     }
 
@@ -184,6 +253,44 @@ export default {
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.input-container {
+    position: relative;
+    text-align: start;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.box {
+    font-size: 14px;
+    max-width: 50px;
+    margin-right: 2px;
+    height: 26px;
+    color: azure;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary);
+}
+
+.input-container i {
+    position: absolute;
+    padding-left: 7px;
+    top: 50%;
+
+    transform: translateY(-50%);
+    border-radius: 5px;
+    color: #888;
+}
+
+.input-container input {
+    padding-left: 45px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 
 .headers {
     height: 70px;
